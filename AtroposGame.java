@@ -81,7 +81,7 @@ public class AtroposGame {
                          this.players[currentPlayer - 1].getName() + 
                          " just tried to make an illegal move!");
       System.err.println("Attempted play was: " + nextPlay);
-      System.err.println(this.gameState)
+      System.err.println(this.gameState);
       System.err.println("Random player will make the move instead.");
       //make a move  
       AtroposPlayer randomPlayer = new AtroposPlayer("Random");
