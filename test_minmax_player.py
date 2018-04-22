@@ -1,6 +1,7 @@
 from minmax_player import MinmaxPlayer
 from random_choice import get_empty_positions
 from random_choice import check_loss
+from copy import deepcopy
 
 
 board_mat = [[-1, -1, -1, -1, -1, -1, -1, -1], [1, 3, -1, -1, -1, -1, -1, -1], [3, 0, 2, -1, -1, -1, -1, -1], [1, 0, 0, 3, -1, -1, -1, -1], [3, 0, 0, 0, 2, -1, -1, -1], [1, 0, 0, 0, 0, 3, -1, -1], [3, 0, 0, 0, 0, 0, 2, -1], [-1, 1, 2, 1, 2, 1, 2, -1]]
@@ -9,6 +10,7 @@ my_move = None
 player = MinmaxPlayer(4, 2)
 empty_positions = get_empty_positions(board_mat)
 while len(empty_positions) > 0:
+    board_copy = deepcopy(board_mat)
     my_color, my_move, info = \
         player.play(board_mat, my_move, get_empty_positions(board_mat))
     if my_move not in empty_positions:
@@ -18,6 +20,6 @@ while len(empty_positions) > 0:
         print("One failed the game!")
         break
     board_mat[my_move[0]][my_move[1]] = my_color
-    empty_positions = get_empty_positions(board_mat)
+    empty_positions = get_empty_positions(board_copy)
 print(board_mat)
 
