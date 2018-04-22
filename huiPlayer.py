@@ -57,13 +57,14 @@ if __name__ == "__main__":
 		last_move = None
 
 	# Decide how to play using random_Player
+	"""
 	my_color, my_move, info = \
 		random_player(board_mat, last_move, get_empty_positions(board_mat))
 	"""
 	player = MinmaxPlayer(3, 10)
 	my_color, my_move, info = \
 		player.play(board_mat, last_move, get_empty_positions(board_mat))
-	"""
+
 	my_x_coordinate = my_move[0]
 	my_y_coordinate = my_move[1]
 
