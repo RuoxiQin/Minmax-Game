@@ -9,6 +9,7 @@ from copy import deepcopy
 import random
 from random_choice import *
 from random_evaluation import random_evaluation
+from random_choice import get_empty_neighboor
 inf = float("inf")
 
 
@@ -36,9 +37,7 @@ class MinmaxPlayer:
                 positions = list(empty_positions)
         else:
             positions = list(empty_positions)
-        if len(positions) == 0:
-            assert False, "There is a tie!!!"
-            return 0, None, None
+        assert len(positions) > 0, "There is a tie!!!"
         if len(positions) > 10:
             # If the search space is larger than 10, just pick a random one
             random.shuffle(positions)
@@ -67,7 +66,7 @@ class MinmaxPlayer:
                     empty_positions -= set((position,))
                     for color in choices:
                         board[position[0]][position[1]] = color
-                        score, my_color, my_position = \
+                        score, c, p = \
                             self._compute_score(\
                             board, position, empty_positions,\
                             depth+1, my_best, parent_worst, not is_me)
@@ -100,7 +99,7 @@ class MinmaxPlayer:
                     empty_positions -= set((position,))
                     for color in choices:
                         board[position[0]][position[1]] = color
-                        score, my_color, my_position = \
+                        score, c, p = \
                             self._compute_score(\
                             board, position, empty_positions,\
                             depth+1, parent_best, my_worst, not is_me)
