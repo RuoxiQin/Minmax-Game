@@ -67,6 +67,7 @@ if __name__ == "__main__":
 	my_color, my_move, info = \
 		player.play(board_mat, last_move, get_empty_positions(board_mat))
 	assert(board_mat == board_copy, "The board has changed!")
+	assert(1==1, "TEst assertion")
 	assert(my_move in get_empty_positions(board_copy), 
 		"I interface detect an illegal move!!!")
 
