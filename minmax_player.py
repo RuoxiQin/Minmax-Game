@@ -37,6 +37,7 @@ class MinmaxPlayer:
         else:
             positions = list(empty_positions)
         if len(positions) == 0:
+            assert(False, "There is a tie!!!")
             return 0, None, None
         if len(positions) > 10:
             # If the search space is larger than 10, just pick a random one
