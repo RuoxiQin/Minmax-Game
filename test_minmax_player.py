@@ -12,12 +12,12 @@ player = MinmaxPlayer(3, 2)
 empty_positions = get_empty_positions(board_mat)
 while len(empty_positions) > 0:
     board_copy = deepcopy(board_mat)
-    """
     my_color, my_move, info = \
         player.play(board_mat, my_move, get_empty_positions(board_mat))
     """
     my_color, my_move, info = \
 		random_player(board_mat, my_move, get_empty_positions(board_mat))
+    """
     if board_mat != board_copy:
         print("Board changed!")
         break
