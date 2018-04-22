@@ -41,8 +41,16 @@ class MinmaxPlayer:
             return 0, None, None
         if len(positions) > 10:
             # If the search space is larger than 10, just pick a random one
-            position = random.choice(positions)
-            return 0, random.choice(solution(board, position)), position
+            random.shuffle(positions)
+            for position in positions:
+                choices = solution(board, position)
+                if len(choices) > 0:
+                    return 0, random.choice(choices), position
+            # Cannot put any color in any position
+            if is_me:
+                return -self.simulation_time, 1, positions[0]
+            else:
+                return self.simulation_time, 1, positions[0]
         if is_me:
             my_best = -inf
             for position in positions:
