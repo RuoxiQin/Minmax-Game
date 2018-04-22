@@ -38,9 +38,9 @@ class MinmaxPlayer:
         else:
             positions = list(empty_positions)
         assert len(positions) > 0, "There is a tie!!!"
+        """
         if len(positions) > 10:
             # If the search space is larger than 10, just pick a random one
-            """
             random.shuffle(positions)
             for position in positions:
                 choices = solution(board, position)
@@ -51,8 +51,8 @@ class MinmaxPlayer:
                 return -self.simulation_time, 1, positions[0]
             else:
                 return self.simulation_time, 1, positions[0]
-            """
-            self.simulation_time = 20
+            #self.simulation_time = 20
+        """
         if is_me:
             my_best = -inf
             for position in positions:
