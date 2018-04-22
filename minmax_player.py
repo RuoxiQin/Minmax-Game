@@ -41,7 +41,7 @@ class MinmaxPlayer:
         if len(positions) > 10:
             # If the search space is larger than 10, just pick a random one
             position = random.choice(positions)
-            return 0, solution(board, position), position
+            return 0, random.choice(solution(board, position)), position
         if is_me:
             my_best = -inf
             for position in positions:
