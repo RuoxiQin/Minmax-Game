@@ -52,7 +52,7 @@ class MinmaxPlayer:
             else:
                 return self.simulation_time, 1, positions[0]
             """
-            self.simulation_time = 1
+            self.simulation_time = 2
         if is_me:
             my_best = -inf
             for position in positions:
