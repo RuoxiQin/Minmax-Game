@@ -59,13 +59,14 @@ if __name__ == "__main__":
 	board_copy = deepcopy(board_mat)
 
 	# Decide how to play using random_Player
-	"""
 	my_color, my_move, info = \
 		random_player(board_mat, last_move, get_empty_positions(board_mat))
 	"""
 	player = MinmaxPlayer(3, 10)
 	my_color, my_move, info = \
 		player.play(board_mat, last_move, get_empty_positions(board_mat))
+	"""
+
 	assert board_mat == board_copy, "The board has changed!"
 	assert my_move in get_empty_positions(board_copy), \
 		"I interface detect an illegal move!!!"
