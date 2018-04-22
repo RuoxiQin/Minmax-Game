@@ -63,7 +63,7 @@ class MinmaxPlayer:
                             return my_best, my_color, my_position
                     # Recover the board and the empty_positions
                     board[position[0]][position[1]] = 0
-                    empty_positions += set((position,))
+                    empty_positions.add(position)
             return my_best, my_color, my_position
         else:
             my_worst = inf
@@ -91,5 +91,5 @@ class MinmaxPlayer:
                             return my_worst, my_color, my_position
                     # Recover the board and the empty_positions
                     board[position[0]][position[1]] = 0
-                    empty_positions += set((position,))
+                    empty_positions.add(position)
             return my_worst, my_color, my_position
