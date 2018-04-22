@@ -40,6 +40,7 @@ class MinmaxPlayer:
         assert len(positions) > 0, "There is a tie!!!"
         if len(positions) > 10:
             # If the search space is larger than 10, just pick a random one
+            """
             random.shuffle(positions)
             for position in positions:
                 choices = solution(board, position)
@@ -50,13 +51,17 @@ class MinmaxPlayer:
                 return -self.simulation_time, 1, positions[0]
             else:
                 return self.simulation_time, 1, positions[0]
+            """
+            self.simulation_time = 1
         if is_me:
             my_best = -inf
             for position in positions:
+                if positions == [(8, 1), (8, 3), (7, 2)]:
+                    print(position)
                 choices = solution(board, position)
                 if len(choices) == 0:
-                    score = -self.simulation_time
-                    if score > my_best:
+                    score = -inf
+                    if score >= my_best:
                         my_best = score
                         my_color = 1
                         my_position = position
@@ -70,7 +75,9 @@ class MinmaxPlayer:
                             self._compute_score(\
                             board, position, empty_positions,\
                             depth+1, my_best, parent_worst, not is_me)
-                        if score > my_best:
+                        if positions == [(8, 1), (8, 3), (7, 2)]:
+                            print(position)
+                        if score >= my_best:
                             my_best = score
                             my_color = color
                             my_position = position
@@ -88,8 +95,8 @@ class MinmaxPlayer:
             for position in positions:
                 choices = solution(board, position)
                 if len(choices) == 0:
-                    score = self.simulation_time
-                    if score < my_worst:
+                    score = inf
+                    if score <= my_worst:
                         my_worst = score
                         my_color = 1
                         my_position = position
@@ -103,7 +110,7 @@ class MinmaxPlayer:
                             self._compute_score(\
                             board, position, empty_positions,\
                             depth+1, parent_best, my_worst, not is_me)
-                        if score < my_worst:
+                        if score <= my_worst:
                             my_worst = score
                             my_color = color
                             my_position = position
