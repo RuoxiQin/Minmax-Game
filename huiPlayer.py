@@ -63,7 +63,7 @@ if __name__ == "__main__":
 	my_color, my_move, info = \
 		random_player(board_mat, last_move, get_empty_positions(board_mat))
 	"""
-	player = MinmaxPlayer(9, 10)
+	player = MinmaxPlayer(13, 10)
 	my_color, my_move, info = \
 		player.play(board_mat, last_move, get_empty_positions(board_mat))
 
