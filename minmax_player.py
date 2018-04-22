@@ -39,7 +39,7 @@ class MinmaxPlayer:
         else:
             positions = list(empty_positions)
         if len(positions) == 0:
-            assert(False, "There is a tie!!!")
+            assert False, "There is a tie!!!"
             return 0, None, None
         if len(positions) > 10:
             # If the search space is larger than 10, just pick a random one
@@ -48,8 +48,6 @@ class MinmaxPlayer:
         if is_me:
             my_best = -inf
             for position in positions:
-                if board[position[0]][position[1]] != 0:
-                    print("haha")
                 choices = solution(board, position)
                 if len(choices) == 0:
                     score = -self.simulation_time
@@ -83,8 +81,6 @@ class MinmaxPlayer:
         else:
             my_worst = inf
             for position in positions:
-                if board[position[0]][position[1]] != 0:
-                    print("haha")
                 choices = solution(board, position)
                 if len(choices) == 0:
                     score = self.simulation_time
