@@ -9,7 +9,7 @@ from copy import deepcopy
 import random
 from random_choice import *
 from random_evaluation import random_evaluation
-from math import inf
+inf = float("inf")
 
 
 class MinmaxPlayer:
