@@ -14,12 +14,12 @@ board_mat = [
     [3, 0, 0, 0, 2, -1, -1, -1, -1, -1], 
     [1, 0, 0, 0, 0, 3, -1, -1, -1, -1], 
     [3, 0, 0, 0, 0, 0, 2, -1, -1, -1], 
-    [1, 3, 0, 0, 0, 0, 0, 3, -1, -1], 
-    [3, 0, 2, 0, 0, 0, 0, 0, 2, -1], 
+    [1, 0, 0, 0, 0, 0, 0, 3, -1, -1], 
+    [3, 0, 0, 0, 0, 0, 0, 0, 2, -1], 
     [-1, 1, 2, 1, 2, 1, 2, 1, 2, -1]]
-last_move = (8, 2)
+last_move = None
 # Decide how to play using random_Player
-player = MinmaxPlayer(5, 20)
+player = MinmaxPlayer(3, 2)
 empty_positions = get_empty_positions(board_mat)
 while len(empty_positions) > 0:
     board_copy = deepcopy(board_mat)

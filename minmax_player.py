@@ -56,8 +56,6 @@ class MinmaxPlayer:
         if is_me:
             my_best = -inf
             for position in positions:
-                if positions == [(8, 1), (8, 3), (7, 2)]:
-                    print(position)
                 choices = solution(board, position)
                 if len(choices) == 0:
                     score = -inf
@@ -75,8 +73,6 @@ class MinmaxPlayer:
                             self._compute_score(\
                             board, position, empty_positions,\
                             depth+1, my_best, parent_worst, not is_me)
-                        if positions == [(8, 1), (8, 3), (7, 2)]:
-                            print(position)
                         if score >= my_best:
                             my_best = score
                             my_color = color
