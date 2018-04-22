@@ -99,4 +99,4 @@ def random_player(board, last_move, empty_positions, info=None):
             continue
         return random.choice(moves), position, info
     # Lose the game
-    return -1, (-1, -1), info
+    return 1, positions[0], info
