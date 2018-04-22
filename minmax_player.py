@@ -8,7 +8,8 @@ The minmax search algorithm
 from copy import deepcopy
 from random_choice import *
 from random_evaluation import random_evaluation
-from math import inf
+
+inf = float("inf")
 
 class MinmaxPlayer:
     def __init__(self, depth, simulation_time):
