@@ -5,6 +5,7 @@ import sys
 from random_choice import random_player
 from random_choice import get_empty_positions
 from minmax_player import MinmaxPlayer
+from copy import deepcopy
 
 def boardState():
 	#### Step 1: board pre-process
@@ -55,6 +56,7 @@ if __name__ == "__main__":
 		last_move = (last_play_xcoordinate, last_play_ycoordinate)
 	else:
 		last_move = None
+	board_copy = deepcopy(board_mat)
 
 	# Decide how to play using random_Player
 	"""
@@ -64,7 +66,9 @@ if __name__ == "__main__":
 	player = MinmaxPlayer(3, 10)
 	my_color, my_move, info = \
 		player.play(board_mat, last_move, get_empty_positions(board_mat))
-	if my_move not in get_empty_positions(board_mat):
+	if board_mat != board_copy:
+		assert(False, "The board has changed!")
+	if my_move not in get_empty_positions(board_copy):
 		assert(False, "I interface detect an illegal move!!!")
 
 	my_x_coordinate = my_move[0]
