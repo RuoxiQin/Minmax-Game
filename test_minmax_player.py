@@ -6,7 +6,7 @@ from random_choice import check_loss
 board_mat = [[-1, -1, -1, -1, -1, -1, -1, -1], [1, 3, -1, -1, -1, -1, -1, -1], [3, 0, 2, -1, -1, -1, -1, -1], [1, 0, 0, 3, -1, -1, -1, -1], [3, 1, 0, 0, 2, -1, -1, -1], [1, 0, 0, 0, 0, 3, -1, -1], [3, 0, 0, 0, 0, 0, 2, -1], [-1, 1, 2, 1, 2, 1, 2, -1]]
 my_move = None
 # Decide how to play using random_Player
-player = MinmaxPlayer(3, 1)
+player = MinmaxPlayer(4, 10)
 empty_positions = get_empty_positions(board_mat)
 while len(empty_positions) > 0:
     my_color, my_move, info = \
