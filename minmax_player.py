@@ -23,9 +23,8 @@ class MinmaxPlayer:
         self.empty_positions = deepcopy(empty_positions)
         score, color, position = self._compute_score(self.board, 
             self.last_move, self.empty_positions, 0, inf, -inf, True)
-        assert(False, "Test assert")
-        if position not in get_empty_positions(board):
-            assert(False, "I maxmin makes an illegal move!!!")
+        assert(position in get_empty_positions(board),
+            "I maxmin makes an illegal move!!!")
         return color, position, info
 
     def _compute_score(self, board, last_move, empty_positions, depth, 

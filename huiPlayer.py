@@ -66,10 +66,9 @@ if __name__ == "__main__":
 	player = MinmaxPlayer(3, 10)
 	my_color, my_move, info = \
 		player.play(board_mat, last_move, get_empty_positions(board_mat))
-	if board_mat != board_copy:
-		assert(False, "The board has changed!")
-	if my_move not in get_empty_positions(board_copy):
-		assert(False, "I interface detect an illegal move!!!")
+	assert(board_mat == board_copy, "The board has changed!")
+	assert(my_move in get_empty_positions(board_copy), 
+		"I interface detect an illegal move!!!")
 
 	my_x_coordinate = my_move[0]
 	my_y_coordinate = my_move[1]
