@@ -23,9 +23,9 @@ class MinmaxPlayer:
         self.last_move = last_move
         self.empty_positions = deepcopy(empty_positions)
         if len(self.empty_positions) <= 6:
-            self.simulation_time = 50
+            self.simulation_time = 5
         elif len(self.empty_positions) <= 10:
-            self.simulation_time = 30
+            self.simulation_time = 3
         score, color, position = self._compute_score(self.board, 
             self.last_move, self.empty_positions, 0, -inf, inf, True)
         return color, position, info
@@ -43,9 +43,9 @@ class MinmaxPlayer:
             positions = list(empty_positions)
         assert len(positions) > 0, "There is a tie!!!"
         if len(positions) > 10:
-            self.simulation_time = 2
+            self.simulation_time = 1
         elif len(positions) > 6:
-            self.simulation_time = 5
+            self.simulation_time = 1
         """
         if len(positions) > 10:
             # If the search space is larger than 10, just pick a random one
