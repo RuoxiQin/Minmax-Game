@@ -33,10 +33,8 @@ class Evaluator:
                 if me_info > 0:
                     board[me_move[0]][me_move[1]] = me_color
                     empty_positions -= set((me_move,))
-                elif me_info == 0:
-                    return 0
-                elif me_info == -1:
-                    return -1
+                else:
+                    return me_info
                 # Opponent move
                 opponent_color, opponent_move, opponent_info = self.opponent(
                     board, me_move, empty_positions, opponent_info)
@@ -44,10 +42,8 @@ class Evaluator:
                     board[opponent_move[0]][opponent_move[1]] = \
                     opponent_color
                     empty_positions -= set((opponent_move,))
-                elif opponent_info == 0:
-                    return 0
-                elif opponent_info == -1:
-                    return 1
+                else:
+                    return -opponent_info
         else:
             me_move = self.last_move
             while True:
@@ -58,20 +54,16 @@ class Evaluator:
                     board[opponent_move[0]][opponent_move[1]] = \
                     opponent_color
                     empty_positions -= set((opponent_move,))
-                elif opponent_info == 0:
-                    return 0
-                elif opponent_info == -1:
-                    return 1
+                else:
+                    return -opponent_info
                 # My move
                 me_color, me_move, me_info = self.me(
                     board, opponent_move, empty_positions, me_info)
                 if me_info > 0:
                     board[me_move[0]][me_move[1]] = me_color
                     empty_positions -= set((me_move,))
-                elif me_info == 0:
-                    return 0
-                elif me_info == -1:
-                    return -1
+                else:
+                    return me_info
 
     def simulate(self, time):
         score = 0
