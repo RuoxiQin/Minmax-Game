@@ -19,7 +19,7 @@ board_mat = [
     [-1, 1, 2, 1, 2, 1, 2, 1, 2, -1]]
 last_move = None
 # Decide how to play using random_Player
-player = MinmaxPlayer(5, 20)
+player = MinmaxPlayer(3, 7)
 empty_positions = get_empty_positions(board_mat)
 while len(empty_positions) > 0:
     board_copy = deepcopy(board_mat)

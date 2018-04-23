@@ -91,12 +91,12 @@ def random_player(board, last_move, empty_positions, info=None):
         positions = list(empty_positions)
     if len(positions) == 0:
         # No place to play. Tie
-        return 0, (-1, -1), info
+        return 0, (-1, -1), 0
     random.shuffle(positions)
     for position in positions:
         moves = solution(board, position)
         if len(moves) == 0:
             continue
-        return random.choice(moves), position, info
+        return random.choice(moves), position, 1
     # Lose the game
-    return 1, positions[0], info
+    return 1, positions[0], -1

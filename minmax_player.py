@@ -23,9 +23,9 @@ class MinmaxPlayer:
         self.last_move = last_move
         self.empty_positions = deepcopy(empty_positions)
         if len(self.empty_positions) <= 6:
-            self.simulation_time = 7
+            self.simulation_time = 14
         elif len(self.empty_positions) <= 10:
-            self.simulation_time = 7
+            self.simulation_time = 14
         score, color, position = self._compute_score(self.board, 
             self.last_move, self.empty_positions, 0, -inf, inf, True)
         return color, position, info
@@ -45,7 +45,7 @@ class MinmaxPlayer:
         if len(positions) > 10:
             self.simulation_time = 7
         elif len(positions) > 6:
-            self.simulation_time = 7
+            self.simulation_time = 14
         """
         if len(positions) > 10:
             # If the search space is larger than 10, just pick a random one

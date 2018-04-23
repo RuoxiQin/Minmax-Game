@@ -33,29 +33,29 @@ class Evaluator:
                 # My move
                 me_color, me_move, me_info = self.me(
                     board, opponent_move, empty_positions, me_info)
-                if me_color > 0:
+                if me_info > 0:
                     board[me_move[0]][me_move[1]] = me_color
                     empty_positions -= set((me_move,))
-                elif me_color == 0:
+                elif me_info == 0:
                     if result is not None:
                         result.append(0)
                     return 0
-                elif me_color == -1:
+                elif me_info == -1:
                     if result is not None:
                         result.append(-1)
                     return -1
                 # Opponent move
                 opponent_color, opponent_move, opponent_info = self.opponent(
                     board, me_move, empty_positions, opponent_info)
-                if opponent_color > 0:
+                if opponent_info > 0:
                     board[opponent_move[0]][opponent_move[1]] = \
                     opponent_color
                     empty_positions -= set((opponent_move,))
-                elif opponent_color == 0:
+                elif opponent_info == 0:
                     if result is not None:
                         result.append(0)
                     return 0
-                elif opponent_color == -1:
+                elif opponent_info == -1:
                     if result is not None:
                         result.append(-1)
                     return 1
@@ -65,29 +65,29 @@ class Evaluator:
                 # Opponent move
                 opponent_color, opponent_move, opponent_info = self.opponent(
                     board, me_move, empty_positions, opponent_info)
-                if opponent_color > 0:
+                if opponent_info > 0:
                     board[opponent_move[0]][opponent_move[1]] = \
                     opponent_color
                     empty_positions -= set((opponent_move,))
-                elif opponent_color == 0:
+                elif opponent_info == 0:
                     if result is not None:
                         result.append(0)
                     return 0
-                elif opponent_color == -1:
+                elif opponent_info == -1:
                     if result is not None:
                         result.append(1)
                     return 1
                 # My move
                 me_color, me_move, me_info = self.me(
                     board, opponent_move, empty_positions, me_info)
-                if me_color > 0:
+                if me_info > 0:
                     board[me_move[0]][me_move[1]] = me_color
                     empty_positions -= set((me_move,))
-                elif me_color == 0:
+                elif me_info == 0:
                     if result is not None:
                         result.append(0)
                     return 0
-                elif me_color == -1:
+                elif me_info == -1:
                     if result is not None:
                         result.append(-1)
                     return -1
