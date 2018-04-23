@@ -73,8 +73,6 @@ class MinmaxPlayer:
                             self._compute_score(\
                             board, position, empty_positions,\
                             depth+1, my_best, parent_worst, not is_me)
-                        if score >= -200:
-                            print(score)
                         if score >= my_best:
                             my_best = score
                             my_color = color
