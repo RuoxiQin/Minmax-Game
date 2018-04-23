@@ -69,5 +69,5 @@ class Evaluator:
         score = 0
         for i in range(time):
             score += self.simulate_one_time()
-        return score
+        return score / time
         
