@@ -13,7 +13,7 @@ import multiprocessing as mp
 class Evaluator:
     def __init__(
         self, board, me, opponent, last_move, my_turn, empty_positions, \
-        mt=True):
+        mt=False):
         self.board = board
         self.me = me
         self.opponent = opponent
@@ -94,10 +94,15 @@ class Evaluator:
 
     def simulate(self, time):
         if not self.mt:
+            """
             score = 0
             for i in range(time):
                 score += self.simulate_one_time()
             return score
+            """
+            pool = mp.Pool()
+            results = [pool.apply(self.simulate_one_time, args=(None,)) for i in range(time)]
+            return sum(results)
         else:
             score = 0
             cpu_core = mp.cpu_count() - 1
