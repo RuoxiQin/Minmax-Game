@@ -23,9 +23,9 @@ class MinmaxPlayer:
         self.last_move = last_move
         self.empty_positions = deepcopy(empty_positions)
         if len(self.empty_positions) <= 6:
-            self.simulation_time = 40
+            self.simulation_time = 20
         elif len(self.empty_positions) <= 10:
-            self.simulation_time = 60
+            self.simulation_time = 30
         score, color, position = self._compute_score(self.board, 
             self.last_move, self.empty_positions, 0, -inf, inf, True)
         return color, position, info
