@@ -100,8 +100,10 @@ class Evaluator:
                 score += self.simulate_one_time()
             return score
             """
-            pool = mp.Pool(mp.cpu_count() - 1)
+            pool = mp.Pool(3)
             results = [pool.apply(self.simulate_one_time, args=(None,)) for i in range(time)]
+            pool.close()
+            pool.join()
             return sum(results)
         else:
             score = 0
@@ -130,4 +132,5 @@ class Evaluator:
                 score += pip.get()
             for p in pool:
                 p.join()
+            pip.close()
             return score
