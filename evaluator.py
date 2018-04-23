@@ -7,13 +7,13 @@ The evaluator class
 
 
 from copy import deepcopy
-import multiprocessing
-import _thread
+import multiprocessing as mp
+
 
 class Evaluator:
     def __init__(
         self, board, me, opponent, last_move, my_turn, empty_positions, \
-        mt=False):
+        mt=True):
         self.board = board
         self.me = me
         self.opponent = opponent
@@ -38,11 +38,11 @@ class Evaluator:
                     empty_positions -= set((me_move,))
                 elif me_info == 0:
                     if result is not None:
-                        result.append(0)
+                        result.put(0)
                     return 0
                 elif me_info == -1:
                     if result is not None:
-                        result.append(-1)
+                        result.put(-1)
                     return -1
                 # Opponent move
                 opponent_color, opponent_move, opponent_info = self.opponent(
@@ -53,11 +53,11 @@ class Evaluator:
                     empty_positions -= set((opponent_move,))
                 elif opponent_info == 0:
                     if result is not None:
-                        result.append(0)
+                        result.put(0)
                     return 0
                 elif opponent_info == -1:
                     if result is not None:
-                        result.append(-1)
+                        result.put(-1)
                     return 1
         else:
             me_move = self.last_move
@@ -71,11 +71,11 @@ class Evaluator:
                     empty_positions -= set((opponent_move,))
                 elif opponent_info == 0:
                     if result is not None:
-                        result.append(0)
+                        result.put(0)
                     return 0
                 elif opponent_info == -1:
                     if result is not None:
-                        result.append(1)
+                        result.put(1)
                     return 1
                 # My move
                 me_color, me_move, me_info = self.me(
@@ -85,11 +85,11 @@ class Evaluator:
                     empty_positions -= set((me_move,))
                 elif me_info == 0:
                     if result is not None:
-                        result.append(0)
+                        result.put(0)
                     return 0
                 elif me_info == -1:
                     if result is not None:
-                        result.append(-1)
+                        result.put(-1)
                     return -1
 
     def simulate(self, time):
@@ -100,19 +100,29 @@ class Evaluator:
             return score
         else:
             score = 0
-            cpu_core = multiprocessing.cpu_count() - 1
+            cpu_core = mp.cpu_count() - 1
+            pip = mp.Queue()
+            pool = []
             for i in range(time // cpu_core):
-                result = []
+                pool = []
                 for j in range(cpu_core):
-                    _thread.start_new_thread(self.simulate_one_time, (result,))
-                while len(result) < cpu_core:
-                    pass
-                score += sum(result)
+                    pool.append(
+                        mp.Process(target=self.simulate_one_time, args=(pip,)))
+                for p in pool:
+                    p.start()
+                for j in range(cpu_core):
+                    score += pip.get()
+                for p in pool:
+                    p.join()
             rest = time % cpu_core
-            result = []
+            pool = []
             for j in range(rest):
-                _thread.start_new_thread(self.simulate_one_time, (result,))
-            while len(result) < rest:
-                pass
-            score += sum(result)
+                pool.append(
+                    mp.Process(target=self.simulate_one_time, args=(pip,)))
+            for p in pool:
+                p.start()
+            for j in range(rest):
+                score += pip.get()
+            for p in pool:
+                p.join()
             return score

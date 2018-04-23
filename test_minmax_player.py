@@ -29,6 +29,7 @@ while len(empty_positions) > 0:
     my_color, my_move, info = \
 		random_player(board_mat, my_move, get_empty_positions(board_mat))
     """
+    print(my_move)
     if board_mat != board_copy:
         print("Board changed!")
         break
