@@ -13,7 +13,7 @@ import _thread
 class Evaluator:
     def __init__(
         self, board, me, opponent, last_move, my_turn, empty_positions, \
-        mt=True):
+        mt=False):
         self.board = board
         self.me = me
         self.opponent = opponent
