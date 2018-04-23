@@ -23,7 +23,7 @@ class MinmaxPlayer:
         self.last_move = last_move
         self.empty_positions = deepcopy(empty_positions)
         score, color, position = self._compute_score(self.board, 
-            self.last_move, self.empty_positions, 0, inf, -inf, True)
+            self.last_move, self.empty_positions, 0, -inf, inf, True)
         return color, position, info
 
     def _compute_score(self, board, last_move, empty_positions, depth, 
@@ -63,7 +63,7 @@ class MinmaxPlayer:
                         my_best = score
                         my_color = 1
                         my_position = position
-                    if my_best >= parent_best:
+                    if my_best >= parent_worst:
                         return my_best, my_color, my_position
                 else:
                     empty_positions -= set((position,))
@@ -73,11 +73,13 @@ class MinmaxPlayer:
                             self._compute_score(\
                             board, position, empty_positions,\
                             depth+1, my_best, parent_worst, not is_me)
+                        if score >= -200:
+                            print(score)
                         if score >= my_best:
                             my_best = score
                             my_color = color
                             my_position = position
-                        if my_best >= parent_best:
+                        if my_best >= parent_worst:
                             # Recover the board and the empty_positions
                             board[position[0]][position[1]] = 0
                             empty_positions.add(position)
@@ -96,7 +98,7 @@ class MinmaxPlayer:
                         my_worst = score
                         my_color = 1
                         my_position = position
-                    if my_worst <= parent_worst:
+                    if my_worst <= parent_best:
                         return my_worst, my_color, my_position
                 else:
                     empty_positions -= set((position,))
@@ -110,7 +112,7 @@ class MinmaxPlayer:
                             my_worst = score
                             my_color = color
                             my_position = position
-                        if my_worst <= parent_worst:
+                        if my_worst <= parent_best:
                             # Recover the board and the empty_positions
                             board[position[0]][position[1]] = 0
                             empty_positions.add(position)
