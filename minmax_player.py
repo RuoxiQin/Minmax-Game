@@ -40,6 +40,8 @@ class MinmaxPlayer:
         assert len(positions) > 0, "There is a tie!!!"
         if len(positions) > 10:
             self.simulation_time = 2
+        elif len(positions) > 6:
+            self.simulation_time = 5
         """
         if len(positions) > 10:
             # If the search space is larger than 10, just pick a random one
