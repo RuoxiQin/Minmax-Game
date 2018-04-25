@@ -12,6 +12,9 @@ from copy import deepcopy
 import random
 import math
 inf = float("inf")
+simulation_time = 1    # Number of simulation
+search_num = 500       # Number of search time
+
 
 
 def boardState():
@@ -341,7 +344,8 @@ class MCTS:
             else:
                 # Rollout
                 node.score = random_evaluation(\
-                    self.board, best_move, node.is_me, self.empty_positions, 1)
+                    self.board, best_move, node.is_me, self.empty_positions, \
+                    simulation_time)
         # Back Propagation
         node.visit += 1.0
         score = node.score * self.gamma
@@ -363,7 +367,7 @@ if __name__ == "__main__":
     board_copy = deepcopy(board_mat)
 
     # Decide how to play using MCTS algorithm
-    player = MCTS(500)
+    player = MCTS(search_num)
     my_color, my_move, info = \
         player.play(board_mat, last_move, get_empty_positions(board_mat))
 
