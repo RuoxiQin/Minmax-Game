@@ -12,7 +12,7 @@ from copy import deepcopy
 import random
 import math
 inf = float("inf")
-simulation_time = 2    # Number of simulation
+simulation_time = 3    # Number of simulation
 search_num = 400       # Number of search time
 
 
