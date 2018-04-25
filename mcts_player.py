@@ -42,13 +42,18 @@ class MCTS:
             self.empty_positions = deepcopy(empty_positions)
             self._expand()
         # Choose the best move
-        highest_score = -inf
-        for (color, x, y) in self.root.children.keys():
-            score = self.root.children[(color, x, y)].score
-            if score > highest_score:
-                highest_score = score
-                best_color = color
-                best_move = (x, y)
+        if len(self.root.children) > 0:
+            highest_score = -inf
+            for (color, x, y) in self.root.children.keys():
+                score = self.root.children[(color, x, y)].score
+                if score > highest_score:
+                    highest_score = score
+                    best_color = color
+                    best_move = (x, y)
+        else:
+            # No solution under this situation. Lose the game
+            best_color = 1
+            best_move = get_next_positions(board, last_move)
         return best_color, best_move, None
 
 
