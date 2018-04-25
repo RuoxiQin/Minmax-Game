@@ -25,9 +25,9 @@ class MinmaxPlayer:
         if len(self.empty_positions) <= 1:
             self.simulation_time =50 
         elif len(self.empty_positions) <= 2:
-            self.simulation_time = 30
+            self.simulation_time = 40
         elif len(self.empty_positions) <= 3:
-            self.simulation_time = 10
+            self.simulation_time = 30
         score, color, position = self._compute_score(self.board, 
             self.last_move, self.empty_positions, 0, -inf, inf, True)
         return color, position, info
