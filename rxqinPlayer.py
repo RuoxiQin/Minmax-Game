@@ -363,7 +363,7 @@ if __name__ == "__main__":
     board_copy = deepcopy(board_mat)
 
     # Decide how to play using MCTS algorithm
-    player = MCTS(400)
+    player = MCTS(500)
     my_color, my_move, info = \
         player.play(board_mat, last_move, get_empty_positions(board_mat))
 
