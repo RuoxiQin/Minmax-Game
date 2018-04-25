@@ -1,10 +1,23 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+"""
+Project 3: Game in AI
+Author: Ruoxi Qin & HUI HAO
+"""
+
+from copy import deepcopy
 import sys
 from copy import deepcopy
 import random
 import math
 inf = float("inf")
 
+
 def boardState():
+    """
+    Read the state of the current board
+    """
     #### Step 1: board pre-process
     board = sys.argv[1].split("L")[0] 
 
@@ -32,10 +45,9 @@ def boardState():
 
 
 def modifyBoard(board_mat, color, xcoordinate, ycoordinate):
-    # modify the given board with target color and position
-    board_mat[xcoordinate][ycoordinate] = color
-    # print(board_mat)
-    
+    """
+    Modify the board based on the output of the algorithm
+    """
     # print my move to stdout for AtroposGame in standard format.
     height = len(board_mat)-1-xcoordinate
     left = ycoordinate
@@ -68,6 +80,9 @@ def get_empty_positions(board):
     return result
 
 def get_next_positions(board, position):
+    """
+    Return a list of next possible play
+    """
     if position is not None:
         positions = get_empty_neighboor(board, position)
         if len(positions) == 0:
@@ -148,6 +163,9 @@ def random_player(board, last_move, empty_positions, info=None):
 
 #------------------------Evaluator----------------------------
 class Evaluator:
+    """
+    Evaluate the board by playing against myself
+    """
     def __init__(
         self, board, me, opponent, last_move, my_turn, empty_positions):
         self.board = board
@@ -158,6 +176,9 @@ class Evaluator:
         self.empty_positions = empty_positions
 
     def simulate_one_time(self, result=None):
+        """
+        Simulate one time
+        """
         board = deepcopy(self.board)
         empty_positions = deepcopy(self.empty_positions)
         me_info = {}
@@ -204,6 +225,9 @@ class Evaluator:
                     return me_info
 
     def simulate(self, time):
+        """
+        Simulate time times and return the average score
+        """
         score = 0
         for i in range(time):
             score += self.simulate_one_time()
@@ -213,7 +237,7 @@ class Evaluator:
 #------------------------Random Evaluation----------------------
 def random_evaluation(board, last_move, is_me, empty_positions, times):
     """
-    Evaluate the current situation for me
+    Evaluate the current situation for me using 2 random players
     Doesn't modify the board nor empty_positions
     """
     e = Evaluator(board, random_player, random_player, last_move, is_me, 
@@ -222,6 +246,9 @@ def random_evaluation(board, last_move, is_me, empty_positions, times):
 
 #----------------------------------MCTS--------------------------
 class TreeNode:
+    """
+    The Tree Node of the MC search tree
+    """
     def __init__(self, is_me, parent, score=0, visit=1, is_leaf=False, \
         children=None):
         self.is_me = is_me
@@ -236,12 +263,18 @@ class TreeNode:
 
 
 class MCTS:
+    """
+    The MCTS player
+    """
     def __init__(self, search_time):
         self.search_time = search_time
         self.c = math.sqrt(2)
         self.gamma = 0.9
 
     def play(self, board, last_move, empty_positions, info=None):
+        """
+        Make the move based on current situation
+        """
         self.root = TreeNode(True, None)
         self.last_move = last_move
         # Expand the tree
@@ -267,6 +300,9 @@ class MCTS:
 
 
     def _expand(self):
+        """
+        Expand the search tree to find the best move
+        """
         node = self.root
         # Selection
         best_move = self.last_move
@@ -315,7 +351,6 @@ class MCTS:
             node.visit += 1.0
             score *= self.gamma
             
-
 
 if __name__ == "__main__": 
     # Get the board state
