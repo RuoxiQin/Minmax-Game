@@ -25,12 +25,8 @@ class MinmaxPlayer:
         if len(self.empty_positions) <= 1:
             self.simulation_time = 300
         elif len(self.empty_positions) <= 2:
-            self.simulation_time = 200
-        elif len(self.empty_positions) <= 3:
-            self.simulation_time = 150
-        elif len(self.empty_positions) <= 4:
             self.simulation_time = 100
-        elif len(self.empty_positions) <= 5:
+        elif len(self.empty_positions) <= 3:
             self.simulation_time = 50
         score, color, position = self._compute_score(self.board, 
             self.last_move, self.empty_positions, 0, -inf, inf, True)
@@ -49,9 +45,7 @@ class MinmaxPlayer:
             positions = list(empty_positions)
         assert len(positions) > 0, "There is a tie!!!"
         if len(positions) > 10:
-            self.simulation_time = 2
-        elif len(positions) > 6:
-            self.simulation_time = 4
+            self.simulation_time = 10
         """
         if len(positions) > 10:
             # If the search space is larger than 10, just pick a random one
