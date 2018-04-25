@@ -31,6 +31,15 @@ def get_empty_positions(board):
                 result.add((x, y))
     return result
 
+def get_next_positions(board, position):
+    if position is not None:
+        positions = get_empty_neighboor(board, position)
+        if len(positions) == 0:
+            positions = list(get_empty_positions(board))
+    else:
+        positions = list(get_empty_positions(board))
+    return positions
+
 
 def get_empty_neighboor(board, position):
     """
