@@ -52,8 +52,9 @@ class MCTS:
                     best_move = (x, y)
         else:
             # No solution under this situation. Lose the game
-            best_color = 1
-            best_move = get_next_positions(board, last_move)[0]
+            #best_color = 1
+            #best_move = get_next_positions(board, last_move)[0]
+            sys.stderr.write("I MCTS lose the game")
         return best_color, best_move, None
 
 
