@@ -13,7 +13,7 @@ import random
 import math
 inf = float("inf")
 simulation_time = 1    # Number of simulation
-search_num = 500       # Number of search time
+search_num = 600       # Number of search time
 
 
 
