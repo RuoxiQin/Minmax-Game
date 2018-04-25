@@ -53,7 +53,7 @@ class MCTS:
         else:
             # No solution under this situation. Lose the game
             best_color = 1
-            best_move = get_next_positions(board, last_move)
+            best_move = get_next_positions(board, last_move)[0]
         return best_color, best_move, None
 
 
