@@ -38,7 +38,6 @@ class MCTS:
         self.last_move = last_move
         # Expand the tree
         for i in range(self.search_time):
-            print("in simulation %d" % i)
             self.board = deepcopy(board)
             self.empty_positions = deepcopy(empty_positions)
             self._expand()
