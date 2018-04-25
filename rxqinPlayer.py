@@ -6,7 +6,6 @@ Project 3: Game in AI
 Author: Ruoxi Qin & HUI HAO
 """
 
-from copy import deepcopy
 import sys
 from copy import deepcopy
 import random
