@@ -1,0 +1,198 @@
+
+<html>
+<head>
+<title> CS640 Homework Template: HW[P3] Student Name [Ruoxi Qin]  </title>
+<style>
+<!--
+body{
+font-family: 'Trebuchet MS', Verdana;
+}
+p{
+font-family: 'Trebuchet MS', Times;
+margin: 10px 10px 15px 20px;
+}
+h3{
+margin: 5px;
+}
+h2{
+margin: 10px;
+}
+h1{
+margin: 10px 0px 0px 20px;
+}
+div.main-body{
+align:center;
+margin: 30px;
+}
+hr{
+margin:20px 0px 20px 0px;
+}
+-->
+</style>
+</head>
+
+<body>
+<center>
+<a href="http://www.bu.edu"><img border="0" src="http://www.cs.bu.edu/fac/betke/images/bu-logo.gif"
+width="119" height="120"></a>
+</center>
+
+<h1>Assignment Title</h1>
+<p> 
+ CS 640 Programming assignment 3 <br>
+ Your Name: Ruoxi Qin<br>
+ Your teammate names if applicable: HUI HAO<br>
+    Date: April 25, 2018
+</p>
+
+<div class="main-body">
+<hr>
+<h2> Problem Definition </h2>
+<p>
+
+<ul>  
+  In this assignment, we need to implement a script based on a strategy, like minimax search, alpha-beta search, a heuristic pruning method we learned in class. The target is to realize such strategy without using random or brute-force search algorithm.
+
+</ul>  
+</p>
+
+<hr>
+<h2> Method and Implementation </h2>
+
+<h3>Coordinate transfering method</h3>
+<ol>  
+<li>We first transfer the original 3-dimension coordinate into 2-dimension coordinate in the form of python list, in order to deal with the input and move easier.</li>
+<li>We parse the input string and convert it into a python list, then add -1 to the list to complement the board into a square board like following:
+<table><tr><td><center>
+          [1   3]<br>
+        [3   0   2]<br>
+      [1   0   0   3]<br>
+    [3   1   0   0   2]<br>
+
+  [1   0   0   0   0   3]<br>
+[3   0   0   0   0   0   2]<br>
+  [1   2   1   2   1   2]<br>
+  </center></td>
+
+<td> ----> </td>
+
+<td><left>
+[-1 -1  -1  -1  -1  -1  -1  -1]<br>
+[1   3  -1  -1  -1  -1  -1  -1]<br>
+[3   0   2  -1  -1  -1  -1  -1]<br>
+[1   0   0   3  -1  -1  -1  -1]<br>
+[3   1   0   0   2  -1  -1  -1]<br>
+[1   0   0   0   0   3  -1  -1]<br>
+[3   0   0   0   0   0   2  -1]<br>
+[-1  1   2   1   2   1   2  -1]<br>
+  </left></td>
+</tr></table> 
+
+</li>  
+<li>The original form (height,left,right) now changed into (len(board)-1-height, left)</li>
+<li>To change our move into original form: (x,y) changed back to be (len(board)-1-x,y,x-y)</li>
+</ol> 
+
+
+<h3>The Minmax algorithm</h3>
+<ol>  
+<li>The first algorithm we use is the alpha-beta pruning.</li>
+<img src="pic/alpha-beta.png" height="350" width="600">
+<li>
+We use Monte Carlo method to estimate the board state. For a given board state, we let 2 players play against each other until one of them win. Both players use random strategy. If the player representing me wins, then we record a positive score 1. Otherwise a negative score -1. This is one simulation. We simulate the game 100 times. And use the average score as the evaluation of the board.
+</li>
+<li>The lower boundary of the running time is kf(s)*(2b^(d/2)), the upper boundary is kf(s)*(b^d)</li>
+<li>b is the number of ways to move, normally from 1 to 9. d is the depth of searching, in our algorithm, we set is as 5. k is a supposed times of playing, we set it 10. f(s) is the cost time of each playing, it's a indeterminate value.</li>
+</ol> 
+
+
+
+<h3>The running time of the Minmax algorithm</h3>
+<ol>  
+<li>The lower boundary of the running time is kf(s)*(2b^(d/2)), the upper boundary is kf(s)*(b^d)</li>
+<li>b is the number of ways to move, normally from 1 to 9. d is the depth of searching, in our algorithm, we set is as 5. k is a supposed times of playing, we set it 10. f(s) is the cost time of each playing, it's a indeterminate value.</li>
+</ol> 
+
+<h3>The Monte Carlo Search Tree algorithm</h3>
+<ol>  
+<li>The second algorithm we used is the Monte Carlo Search Tree algorithm (MCTS). The procedure of the algorithm is the shown in the picture below.</li>
+<img src="pic/MCTS.svg" height="350" width="600">
+<li>
+The reason we use this method is that we noticed some plays in the early stage doesn't show their effect in just several moves. The value is usually shown in the very end of the game. So we should not only search in a shallow tree, but need to find the effective move for the future. MCTS algorithm explores those most promising plays and ignore the branches with poor performance.
+</li>
+<li>
+We build the search tree with 400 explorations. In each exploration, we evaluate the board situation using the rollout method discussed above, but with only 2 simulations. We tried different combination of the parameters and found that the simulation time doesn't need to be too large. The more exploration will contribute much more to a higher wining rate.
+</li>
+</ol> 
+
+
+
+<h3>The running time of the MCTS algorithm</h3>
+<ol>  
+  <li>The time complexity of the MCTS algorithm is E * S, where E represents the number of exploration and S represents the number of simulation in each exploration.</li>
+</ol> 
+
+
+<hr>
+<h2>Experiments and Results</h2>
+<ol>
+  <li>To test our algorithm, use command " java AtroposGame 7 "python3 rxqinPlayer.py" "</li>
+  <li>We test our Minmax algorithm against the DEFAULT player and wins 8 games out of 10. The wining rate is 80%</li>
+  <li>We test our MCTS algorithm against the DEFAULT player and wins 10 games out of 10. The wining rate is 100%</li>
+  <li>In order to fine tune the parameters of the MCTS algorithm, we tried 3 different parameters combinations: E=800, S=1; E=400, S=2; E=200, S=4. And we found out the E=400, S=2 performs the best against others.</li>
+  <li>We also let our 2 algorithms play against each other and the MCTS wins 7 out of 10 games.</li>
+<img src="pic/result.jpeg" height="350" width="600">
+</ol>
+
+
+
+<hr>
+<h2> Discussion </h2>
+
+<ul>
+
+<td>
+</td>
+<h4><li>Strength of our MCTS algorithm: </li></h4>
+<tr>
+  Our algorithm does not search every branches, but use the computation power on those most promising branches and explore that branch until the end of the game. So it yields a better result.
+ </tr>
+<h4><li>Weakness of MCTS algorithm:</li> </h4>
+<tr>
+  The MCTS is not very suitable for the "chess-like" games where there are some traps appear in just a few steps. In that situation, the Minmax should perform better since it searches for every possible situation.
+</tr>  
+</ul>
+
+<hr>
+<h2> Conclusions </h2>
+
+<p>
+This Atropos game is more like the Go rather than Chess. Each play usually shows its value until the very end of the game. So the limitation of the horizon in the Minmax algorithm makes it performs poorly in this game compared to the MCTS.
+</p>
+
+
+<hr>
+<h2> Credits and Bibliography </h2>
+<p>
+
+
+
+</p><p>
+<h4> URLs of related materials on the Internet: </h4>
+<li> <a href="https://en.wikipedia.org/wiki/Minimax">https://en.wikipedia.org/wiki/Minimax </a></li>
+<li> <a href="https://en.wikipedia.org/wiki/Alphabeta_pruning">https://en.wikipedia.org/wiki/Alphabeta_pruning </a></li>
+<li> <a href="https://en.wikipedia.org/wiki/Monte_Carlo_tree_search">https://en.wikipedia.org/wiki/Monte_Carlo_tree_search </a></li>
+<li> <a href="Monte Carlo Tree Search in Go">http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.699.1458&rep=rep1&type=pdf </a></li>
+</p>
+
+<p>
+<h4> Teammate: 
+<li> My teammate is HUI HAO. </li></h4>	
+</p>
+<hr>
+</div>
+</body>
+
+
+
+</html>
