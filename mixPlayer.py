@@ -62,7 +62,7 @@ if __name__ == "__main__":
     # Decide how to play using random_Player
     empty_positions = get_empty_positions(board_mat)
     if len(empty_positions) > 4:
-        player = MCTS(300)
+        player = MCTS(400)
         my_color, my_move, info = \
             player.play(board_mat, last_move, empty_positions)
     else:
