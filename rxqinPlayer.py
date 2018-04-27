@@ -4,6 +4,7 @@
 """
 Project 3: Game in AI
 Author: Ruoxi Qin & HUI HAO
+Use the MCTS algorithm to play the Atropos Game
 """
 
 import sys
