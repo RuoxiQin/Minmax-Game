@@ -4,6 +4,8 @@
 """
 Project 3: Game in AI
 Author: Ruoxi Qin & HUI HAO
+Instruction: To test the code, use the command:
+java AtroposGame 7 "python3 rxqinPlayer.py"
 """
 
 import sys
@@ -29,7 +31,7 @@ def boardState():
     board_mat[len(board_mat)-1].insert(0, -1)
 
     for sub_list in board_mat:
-        sub_list += [-1 for i in range(len(board_mat)-len(sub_list))]
+        sub_list += [-1 for i in range(8-len(sub_list))]
 
     #### Step 2: last_play pre-process
     last_play = sys.argv[1].split("L")[1][8:-1] 
